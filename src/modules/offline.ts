@@ -1,5 +1,5 @@
 if(navigator.serviceWorker) {
-    /* const worker =  */location.port != '3000'
+    /* const worker =  */location.port != '3300'
     ? navigator.serviceWorker.register(new URL('/sw.js', import.meta.url).href)
     : null
     
