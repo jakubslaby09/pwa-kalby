@@ -1,0 +1,38 @@
+<h1>Dostupnost ve skupině</h1>
+
+<section x-data="{
+    people: [
+        'Franta',
+        'Bohouš'
+    ]
+}">
+<template x-for="name in people">
+    <div ripple class="person">
+        <p x-text="name"></p>
+        <p class="arrow">chevron_right</p>
+    </div>
+</template>
+
+</section>
+
+<style scoped>
+    .person {
+        display: flex;
+        height: 5rem;
+        border: solid currentColor;
+        border-width: 1.5px 0 0;
+    }
+    .person:last-of-type {
+        border-width: 1.5px 0;
+    }
+    .person > .arrow {
+        font-family: 'Material Icons';
+        margin-left: auto;
+    }
+    .person > * {
+        margin: auto 1rem;
+    }
+    hr {
+        margin: unset;
+    }
+</style>

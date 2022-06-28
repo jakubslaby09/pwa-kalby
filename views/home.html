@@ -1,5 +1,38 @@
-<h1>Vanilla PWA Template</h1>
-<h2>Sample text</h2>
-<p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, earum? Sed doloremque consequatur iure porro expedita officia non totam veniam obcaecati sit beatae, sapiente repellendus harum est, quos voluptatibus quis! A unde impedit, praesentium magni sunt cum ut aspernatur nulla. Odio repellat omnis commodi consectetur officiis pariatur provident aliquid quia? Necessitatibus minus ab officiis, mollitia provident sint ex error cum modi blanditiis autem quas reprehenderit rem earum numquam asperiores maiores velit at culpa, hic deleniti enim laboriosam! Tempora deserunt libero eaque accusantium? Unde accusamus deserunt dolorum ipsum veniam. Omnis, at ipsa! Voluptate, eos laboriosam voluptatem reprehenderit quos soluta excepturi tempore iure dolorem? Repudiandae, reiciendis consequuntur. Cupiditate rem odit autem deserunt, quibusdam quisquam tempora, ut ipsa dolor atque eligendi. Optio unde soluta perferendis cum, mollitia molestiae maxime dolor ipsa, hic eaque officiis neque. Ipsa animi consequatur numquam enim quia corporis dolor, quibusdam reprehenderit voluptatem sunt eveniet atque fugiat at facere corrupti eos, facilis repellat! Eos, earum ad. Assumenda laboriosam provident optio animi praesentium illo reprehenderit doloremque ipsam vitae placeat ullam amet, hic quas voluptas quidem quisquam incidunt? Doloremque hic error rerum aspernatur laboriosam harum quo? Odit hic aliquid cum optio enim placeat magni culpa, cupiditate amet possimus, eveniet eum obcaecati maiores. Voluptas quos nihil facere excepturi id. Ducimus odio eligendi omnis illum in et. Dicta quasi possimus impedit tempore deleniti ab error excepturi esse veniam harum. Sunt ut molestias beatae nostrum neque a. Eligendi necessitatibus inventore cumque, maxime provident quod laboriosam et dignissimos harum, sequi voluptas illo quo labore nisi at eveniet reprehenderit quis magni? Corporis laboriosam sapiente tenetur possimus atque perspiciatis, amet quidem dicta animi quisquam accusamus harum consequuntur deleniti, neque voluptas beatae alias, repudiandae error! Molestiae iusto at maiores eligendi nulla iste praesentium repudiandae sed ullam reiciendis. Perferendis, doloremque earum. Rerum tempore ullam est eos quis at quo deleniti.
-</p>
+<h1>Moje dostupnost</h1>
+
+<section>
+    <h4>Význam</h4>
+    <button disabled>Ne</button>
+    <button disabled filled secondary>Možná</button>
+    <button disabled filled>Ano</button>
+</section>
+
+<template x-for="month in ['Červen', 'Červenec']">
+    <section>
+        <h4 x-text="month"></h4>
+        <div class="month">
+            <template x-for="day in 30">
+                <div class="day" x-data="{ available: 2 }">
+                    <button 
+                        x-text="day + '.'"
+                        :filled="available > 0"
+                        :secondary="available == 1"
+                        @click="available = (available + 1) % 3"
+                    ></button>
+                </div>
+            </template>
+        </div>
+    </section>
+</template>
+
+<style scoped>
+    .month {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .day {
+        width: 5rem;
+        height: 5rem;
+    }
+</style>
