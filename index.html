@@ -2,7 +2,7 @@
 <html
   lang="en"
   x-data="{ 
-    light: false,
+    light: true,
     appmenu: false,
   }"
   :light="light"
@@ -15,54 +15,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="manifest" href="/manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A lightweight template for a PWA with Material-looking styles.">
+    <meta name="description" content="Nástroj pro plánování chlastaček">
     <script src="//unpkg.com/alpinejs" defer></script>
-    <title>Vanilla PWA Template</title>
+    <title>Kalby</title>
   </head>
   <body>
-    <header icon="search">
-      <input type="text" placeholder="Search nothing">
-      <button 
-        icon
-        @click="light = !light; sounds.shutter()"
-        x-text="light ? 'light_mode' : 'dark_mode'"
-        :rotate="light"
-      />
-      <button icon @click="appmenu = true">more_vert</button>
-    </header>
+
     <nav>
-      <h4>Nav Header</h4>
-      <a page="benchmark" icon="speed">Benchmark</a>
-      <a page="home" icon="home">Home</a>
-      <a page="about" icon="notes">About project</a>
-      <hr>
-      <h5>Labels</h5>
-      <a page="" icon="circle">Label</a>
-      <a page="" icon="change_history">Label</a>
-      <a page="" icon="square">Label</a>
+      <a page="home" icon="home">Moje</a>
+      <a page="skupina" icon="groups">Skupina</a>
     </nav>
-    <main></main>
-    <dialog appmenu :active="appmenu">
-      <div scrim @click="appmenu = false"></div>
-      <title>Menu Title</title>
-      <div icon="notes">
-        <title>Some notes</title>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil, deleniti.</p>
-      </div>
-      <div icon="info">
-        <p>Lorem, ipsum dolor.</p>
-      </div>
-      <div>
-        <button icon="settings" view="settings?test value 2" @click="appmenu = false">Settings & Preferences</button>
-        <button icon="update" :disabled="!navigator.onLine" onclick="updateCaches(); sounds.refresh()">
-          Clear Offline Caches
-        </button>
-        <button icon="analytics">Project Licence</button>
-      </div>
-      <footer>
-        &copy; Jakub Slabý &bullet; 2021
-      </footer>
-    </dialog>
+
+    <header icon="search">
+      <input type="text" placeholder="Kalby">
+      <button icon view="settings">settings</button>
+    </header>
+
+    <main/>
+
     <script type="module" src="/src/main.ts" defer></script>
   </body>
 </html>
