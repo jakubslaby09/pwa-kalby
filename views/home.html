@@ -1,11 +1,17 @@
 <h1>Moje dostupnost</h1>
 
-<section>
-    <h4>Význam</h4>
-    <button disabled>Ne</button>
-    <button disabled filled secondary>Možná</button>
-    <button disabled filled>Ano</button>
-</section>
+<card outlined style="max-width: min(600px, 100%)">
+    <h4>Návod k používání</h4>
+
+    <p>Klikej na čísla dnů v kalendáři níže pro změnu jejich hodnoty.</p>
+
+    <!-- TODO: Měnit text podle pohlaví uživatele -->
+    <button disabled>Nedostupný</button>
+    <button disabled filled secondary>Nedokážu zjistit</button>
+    <button disabled filled>Jistě dostupný</button>
+
+    <p>Hodnota tvé dostupnosti v daný den je indikována barvou korespondujícího čísla podle infografiky výše.</p>
+</card>
 
 <template x-for="month in ['Červen', 'Červenec']">
     <section>
