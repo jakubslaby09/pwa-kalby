@@ -2,10 +2,11 @@
 <html
   lang="cs"
   x-data="{ 
-    light: true,
+    light: localStorage['lightmode'] != 'false',
     appmenu: false,
   }"
   :light="light"
+  x-effect="localStorage['lightmode'] = light"
   style="display: none; /* CLS */"
 >
   <head>
