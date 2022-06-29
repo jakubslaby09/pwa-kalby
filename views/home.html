@@ -1,25 +1,33 @@
 <h1>Moje dostupnost</h1>
 
-<!-- <card filled x-show="!await calendar">
+<card filled x-show="$store.auth?.user == false">
     <h4>Žádný účet k přihlášení</h4>
     <p>Bez přihlášení nelze načíst kalendář.</p>
     
     <img media src="/images/signin.png" style="max-width: 30rem">
 
     <p>Pro přihlášení přes Google OAuth klikni na <span style="font-family: 'Material Icons'">no_accounts</span> v horní liště.</p>
-</card> -->
+</card>
 
-<card outlined style="max-width: min(600px, 100%)">
+<card
+    outlined
+    style="max-width: min(600px, 100%)"
+    x-data="{ closed: localStorage['welcomeCard'] == 'false' }"
+    x-effect="localStorage['welcomeCard'] = !closed"
+    x-show="$store.calendar && !closed"
+    x-transition
+>
     <h4>Návod k používání</h4>
-
+    
     <p>Klikej na čísla dnů v kalendáři níže pro změnu jejich hodnoty.</p>
-
+    
     <!-- TODO: Měnit text podle pohlaví uživatele -->
     <button disabled>Nedostupný</button>
-    <button disabled filled secondary>Nedokážu zjistit</button>
-    <button disabled filled>Jistě dostupný</button>
-
+    <button disabled filled secondary>Nejisté</button>
+    <button disabled filled>Určitě dostupný</button>
+    
     <p>Hodnota tvé dostupnosti v daný den je indikována barvou korespondujícího čísla podle infografiky výše.</p>
+    <button @click="closed = true">Zavřít</button>
 </card>
 
 <template x-for="(month, name) in $store.calendar">
