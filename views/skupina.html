@@ -1,16 +1,58 @@
-<h1>Dostupnost ve skupině</h1>
+<h1>Průniky</h1>
 
-<section x-data="{
-    people: [
-        'Franta',
-        'Bohouš'
-    ]
-}">
-<template x-for="name in people">
-    <div ripple class="person">
-        <p x-text="name"></p>
+<card filled>
+    <h4>Poznámka</h4>
+    <p>Tato sekce je jen ilustrační, nemá nic společného s databází</p>
+</card>
+<br>
+
+<section x-data="{ penetrations: [
+    {
+        first: 0,
+        values: [1.2, 2, 1.9, 1.5]
+    },
+    {
+        first: 17,
+        values: [2, 2]
+    },
+    {
+        first: 23,
+        values: [2, 1.6, 1.8, 2]
+    },
+]}">
+    <template x-for="(penetration, i) in penetrations">
+        <card outlined>
+            <template x-for="day in penetration.values.length + 2">
+                <button
+                    :secondary="penetration.values[day - 1] == 2"
+                    :filled="day > 1 && day < penetration.values.length + 2"
+                    x-text="day - 1 + penetration.first + '.'"
+                    x-show="penetration.first != 0 || day != 1"
+                    style="margin: 0 0.5rem;"
+                ></button>
+            </template>
+        </card>
+    </template>
+</section>
+    
+<h1>Zahrnutí</h1>
+
+<section x-data="{ people: [
+    {
+        name: 'Franta',
+        include: true,
+    },
+    {
+        name: 'Bohouš',
+        include: true,
+    }
+]}">
+<template x-for="(person, i) in people">
+    <label ripple class="person" :for="'include' + i + 'checkbox'">
+        <input type="checkbox" x-model="person.include" :id="'include' + i + 'checkbox'">
+        <p x-text="person.name"></p>
         <p class="arrow">chevron_right</p>
-    </div>
+    </label>
 </template>
 
 </section>
@@ -27,10 +69,10 @@
     }
     .person > .arrow {
         font-family: 'Material Icons';
-        margin-left: auto;
+        margin-left: auto !important;
     }
     .person > * {
-        margin: auto 1rem;
+        margin: auto 1rem !important;
     }
     hr {
         margin: unset;
