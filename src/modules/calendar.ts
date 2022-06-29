@@ -4,15 +4,18 @@ import { onAuthStateChanged } from "firebase/auth"
 
 declare global {
     interface Window {
-        calendar: Promise<Calendar | null>
+        calendar: Calendar | null,
+        Alpine: any,
     }
 }
 
 const advance = 3
-let calendar: Promise<Calendar | null> = getCalendar()
+let calendar: Calendar | null = null
 window.calendar = calendar
 
-//onAuthStateChanged(auth, () => calendar = getCalendar())
+onAuthStateChanged(auth, async () => {
+    calendar = await getCalendar()
+})
 
 function updateCalendar(calendar: Calendar) {
     const firstMonth = new Date().getMonth()
@@ -48,21 +51,24 @@ async function getCalendar() {
     if(!snap.exists()) {
         console.log('vytváření uživatele')
         const calendar = updateCalendar({
-            /* '2022-06': [0, 0, 0, 0, 1, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 1, 0, 2],
-            '2022-08': [0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] */
+            /* '2022-06': [0, 0, 0, 0, 1, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 1, 0, 2] */
         })
         set(ref(db, `calendars/${auth.currentUser?.uid}`), calendar)
         return calendar
     }
 
-    return updateCalendar(snap.toJSON() as Calendar)
+    const calendar = updateCalendar(snap.toJSON() as Calendar)
+    window.Alpine.store('calendar', calendar)
+    return calendar
 }
 
-async function setCalendar(calendar: Calendar) {
+async function saveCalendar() {
+    if(!calendar) return
+
     const calendarRef = ref(db, `calendars/${auth.currentUser?.uid}`)
     set(calendarRef, updateCalendar(calendar))
 }
-(window as any).save = async () => await calendar != null ? setCalendar(await calendar as Calendar) : 0
+window.Alpine.store('save', saveCalendar)
 
 type Availability = 0 | 1 | 2
 type Calendar = {

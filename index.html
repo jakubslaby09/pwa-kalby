@@ -27,12 +27,12 @@
     </nav>
 
     <header icon="search">
-      <input type="text" placeholder="Kalby">
+      <input type="text" placeholder="Kalby" :value="$store.test">
       <button
         icon
-        @click="auth.login()"
-        @auth.window="$el.innerHTML = window.auth?.currentUser ? 'account_circle' : 'no_accounts'"
-      ></button>
+        @click="$store.login()"
+        @auth.window="$el.innerHTML = $store.auth?.user ? 'account_circle' : 'no_accounts'"
+      >no_accounts</button>
       <button icon view="settings">settings</button>
     </header>
 

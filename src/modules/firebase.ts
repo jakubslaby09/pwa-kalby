@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
 import { getDatabase } from "firebase/database"
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, User } from "firebase/auth"
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -25,7 +25,16 @@ app.automaticDataCollectionEnabled = false
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app)
 ;(window as any).auth = auth
-onAuthStateChanged(auth, () => window.dispatchEvent(new Event('auth')))
+/* ;(window as any).Alpine.store('auth', {
+  user: auth.currentUser
+}) */
+onAuthStateChanged(auth, user => {
+  console.log('uživatel: ', user)
+  ;(window as any).Alpine.store('auth', {
+    user: !!user,
+  })
+  window.dispatchEvent(new Event('auth'))
+})
 
 // Initialize Realtime Database and get a reference to the service
 export const db = getDatabase(app)
@@ -36,5 +45,7 @@ async function login() {
     const res = await signInWithPopup(auth, provider)
     
     console.log(`uživatel přihlášen`, res)
+    setTimeout(() => window.dispatchEvent(new Event('auth')), 0)
+    
 }
-(window as any).auth.login = login
+;(window as any).Alpine.store('login', login)
