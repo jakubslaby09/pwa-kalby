@@ -1,5 +1,14 @@
 <h1>Moje dostupnost</h1>
 
+<!-- <card filled x-show="!await calendar">
+    <h4>Žádný účet k přihlášení</h4>
+    <p>Bez přihlášení nelze načíst kalendář.</p>
+    
+    <img media src="/images/signin.png" style="max-width: 30rem">
+
+    <p>Pro přihlášení přes Google OAuth klikni na <span style="font-family: 'Material Icons'">no_accounts</span> v horní liště.</p>
+</card> -->
+
 <card outlined style="max-width: min(600px, 100%)">
     <h4>Návod k používání</h4>
 
@@ -13,23 +22,25 @@
     <p>Hodnota tvé dostupnosti v daný den je indikována barvou korespondujícího čísla podle infografiky výše.</p>
 </card>
 
-<template x-for="month in calendar.months">
-    <section>
-        <h4 x-text="month.name"></h4>
+<template x-for="(month, name) in await calendar">
+    <section x-show="await calendar">
+        <h3 x-text="new Date(name).toLocaleString('cs', { month: 'long' })"></h3>
         <div class="month">
-            <template x-for="(value, day) in month.days">
+            <template x-for="(value, day) in month">
                 <div class="day">
                     <button 
-                        x-text="day + 1 + '.'"
+                        x-text="(Number.parseInt(day) + 1) + '.'"
                         :filled="value > 0"
                         :secondary="value == 1"
-                        @click="month.days[day] = (value + 1) % 3"
+                        @click="month[day] = (value + 1) % 3; save()"
                     ></button>
                 </div>
             </template>
         </div>
     </section>
 </template>
+
+<!-- <button fab @click="$dispatch(new Event('save'))">send</button> -->
 
 <style scoped>
     .month {
