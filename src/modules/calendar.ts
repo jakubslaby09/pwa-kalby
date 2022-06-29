@@ -1,22 +1,25 @@
 class Calendar {
-    size = 2
+    static size = 2
     months: { name: string; days: Availability[] }[]
     
-    constructor() {
+    constructor(months = []) {
         const thisMonth = new Date().getMonth()
 
-        this.months = []
+        this.months = months
 
-        for (let i = 0; i < this.size; i++) {
-            const length = new Date(
-                new Date().getFullYear(),
-                thisMonth + i + 1,
-                0
-            ).getDate()
+        if(!months.length) {
 
-            this.months[i] = {
-                name: monthNames[(thisMonth + i) % 12],
-                days: new Array<Availability>(length).fill(2)
+            for (let i = 0; i < Calendar.size; i++) {
+                const length = new Date(
+                    new Date().getFullYear(),
+                    thisMonth + i + 1,
+                    0
+                ).getDate()
+                
+                this.months[i] = {
+                    name: monthNames[(thisMonth + i) % 12],
+                    days: new Array<Availability>(length).fill(2)
+                }
             }
         }
     }
