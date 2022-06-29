@@ -28,6 +28,11 @@
 
     <header icon="search">
       <input type="text" placeholder="Kalby">
+      <button
+        icon
+        @click="auth.login()"
+        @auth.window="$el.innerHTML = window.auth?.currentUser ? 'account_circle' : 'no_accounts'"
+      ></button>
       <button icon view="settings">settings</button>
     </header>
 
