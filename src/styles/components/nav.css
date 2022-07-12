@@ -66,6 +66,10 @@ body > nav {
         }
     }
 
+    ~ main:first-of-type {
+        bottom: 80px;
+    }
+
     @media screen and (min-width: 600px) and (min-height: 600px) {
         inset: 0 auto 0 0;
         width: 80px;
@@ -79,6 +83,7 @@ body > nav {
 
         ~ main:first-of-type {
             left: 80px;
+            bottom: 0;
         }
 
         @at-root body > header:is(header) {
@@ -129,6 +134,7 @@ body > nav {
         
         ~ main:first-of-type {
             left: 360px;
+            bottom: 0;
         }
         
         @at-root body > header:is(header) {

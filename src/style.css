@@ -11,6 +11,7 @@
 @import "styles/components/dialog.css";
 @import "styles/components/card.css";
 @import "styles/components/input.css";
+@import "styles/components/section.css";
 
 html {
   display: initial !important; /* CLS */
@@ -68,4 +69,65 @@ html[light] {
 ::-webkit-scrollbar-thumb {
   border-radius: 0.125rem;
   background-color: #8884;
+}
+
+:root /* Body large */ {
+  font-family: 'Roboto', 'Noto Sans';
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.015em;
+}
+h1 /* Display large */ {
+  line-height: 64px;
+  font-size: 57px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+h2 /* Display medium */ {
+  line-height: 52px;
+  font-size: 45px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+/* Display small {
+  line-height: 44px;
+  font-size: 36px;
+  letter-spacing: 0;
+  font-weight: 400;
+} */
+h3 /* Headline large */ {
+  line-height: 40px;
+  font-size: 32px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+/* Headline medium { 
+  line-height: 36px;
+  font-size: 28px;
+  letter-spacing: 0;
+  font-weight: 400;
+} */
+h4 /* Headline small */ {
+  line-height: 32px;
+  font-size: 24px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+/* Title large {
+  line-height: 28px;
+  font-size: 22px;
+  letter-spacing: 0;
+  font-weight: 400;
+} */
+h5 /* Title medium */ {
+  line-height: 24px;
+  font-size: 16px;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+h6 /* Title small */ {
+  line-height: 20px;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  font-weight: 500;
 }

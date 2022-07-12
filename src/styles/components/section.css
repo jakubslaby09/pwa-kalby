@@ -1,0 +1,23 @@
+body > main {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+
+    > * {
+        flex: 100%;
+    }
+}
+
+@media screen and (min-width: calc(840px + 360px)) {
+    body > main > section {
+        flex: 34%;
+        
+        &[large] {
+            flex: 62%;
+        }
+        
+        &[full] {
+            flex: 100%;
+        }
+    }
+}
