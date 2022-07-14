@@ -11,7 +11,7 @@
       background: radial-gradient(
         circle,
         currentColor 10%,
-        #0000 calc(10% + 0.1px /* smooth out pixels */)
+        #0000 calc(10% + 1px /* smooth out pixels */)
       );
       transform: scale(0);
       pointer-events: none;
