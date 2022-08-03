@@ -85,101 +85,87 @@ textfield {
 }
 
 input[type="checkbox"] {
-    position: relative;
-    width: 0;
-    height: 0;
-    margin: calc(12px + 1rem) calc(12px + 1rem) calc(12px + 1rem) calc(12px);
-    overflow: visible;
-    vertical-align: middle;
+    position: absolute;
+    opacity: 0;
 
-    &:not([switch]) {
-        color: var(--on-surface);
-        z-index: 1;
-
-        &::after {
-            margin: -18px;
-            width: 31px;
-            height: 31px;
-            z-index: -1;
-        }
-
-        &::before {
-            content: "";
-            position: absolute;
-            margin: -12px;
-            width: 20px;
-            height: 20px;
-            border: var(--outline);
-            border-width: 2px;
-            border-radius: 2px;
-            animation: checkbox-uncheck 0.2s cubic-bezier(0, 0.5, 0, 1);
-        }
+    + label {
+        display: block;
+        padding: 1rem 0 1rem 0;
         
-        &:checked::before {
-            content: "checked";
-            color: var(--on-primary);
-            background-color: var(--primary);
-            border-color: var(--primary);
-            font-family: "Material Icons";
-            font-size: 20px;
-            animation: checkbox-check 0.3s cubic-bezier(0, 0, 0, 1);
-        }
-    }
-
-    &[switch] {
-        margin-right: calc(40px + 1rem);
-
-        &::before {
-            content: "";
-            position: absolute;
-            width: 52px;
-            height: 32px;
-            margin: -15.5px -12px;
-            outline: var(--outline);
-            outline-width: 2px;
-            outline-offset: -2px;
-            border-radius: 16px;
-            background-color: var(--surface-variant);
-        }
-
-        &:checked::before {
-            background-color: var(--primary);
-            outline-color: var(--primary);
-        }
-        
-        &::after {
-            content: "";
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            margin: -7.5px 6px;
-            border-radius: 12px;
-            background: var(--outline-color);
-            transform: translateX(-10px);
-            animation: none;
-            inset: unset;
-            opacity: unset;
-            transition: transform 0.2s cubic-bezier(0, 0, 0, 1);
-        }
-        
-        &:active::after {
-            transform: translateX(-10px) scale(1.75);
-        }
-        
-        &:checked:after {
-            color: var(--on-primary);
-            background-color: var(--on-primary);
-            transform: translateX(10px) scale(1.5);
-        }
-        
-        &:checked:active::after {
-            transform: translateX(10px) scale(1.75);
-        }
-    }
-
-    &, + label {
-        cursor: pointer;
+        overflow: clip;
         user-select: none;
+    }
+    
+    &:not([switch]) + label::before {
+        content: "";
+        position: absolute;
+        right: 1rem;
+        width: 20px;
+        height: 20px;
+        border: var(--outline);
+        border-width: 2px;
+        border-radius: 2px;
+        color: var(--on-surface);
+        animation: checkbox-uncheck 0.2s cubic-bezier(0, 0.5, 0, 1);
+        z-index: 1;
+    }
+    
+    &:not([switch]):checked + label::before {
+        content: "checked";
+        color: var(--on-primary);
+        background-color: var(--primary);
+        border-color: var(--primary);
+        font-family: "Material Icons";
+        font-size: 20px;
+        animation: checkbox-check 0.3s cubic-bezier(0, 0, 0, 1) forwards;
+    }
+
+    &[switch] + label::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        width: 52px;
+        height: 32px;
+        margin: -15.5px 0;
+        outline: var(--outline);
+        outline-width: 2px;
+        outline-offset: -2px;
+        border-radius: 16px;
+        background-color: var(--surface-variant);
+    }
+
+    &[switch]:checked + label::before {
+        background-color: var(--primary);
+        outline-color: var(--primary);
+    }
+    
+    &[switch] + label::after {
+        content: "";
+        position: absolute;
+        inset: auto 18px auto auto;
+        width: 16px;
+        height: 16px;
+        margin: -7.5px 0;
+        border-radius: 12px;
+        background: var(--outline-color);
+        transform: translateX(-10px);
+        animation: none;
+        opacity: unset;
+        transition: transform 0.2s cubic-bezier(0, 0, 0, 1);
+    }
+    
+    &[switch]:active + label::after {
+        transform: translateX(-10px) scale(1.75);
+    }
+    
+    &[switch]:checked + label:after {
+        color: var(--on-primary);
+        background-color: var(--on-primary);
+        transform: translateX(10px) scale(1.5);
+    }
+    
+    &[switch]:checked:active + label::after {
+        transform: translateX(10px) scale(1.75);
     }
 }
 

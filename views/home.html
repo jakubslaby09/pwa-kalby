@@ -23,7 +23,7 @@
     
     <!-- TODO: Měnit text podle pohlaví uživatele -->
     <button disabled>Nedostupný</button>
-    <button disabled filled secondary>Nejisté</button>
+    <button disabled tonal>Nejisté</button>
     <button disabled filled>Určitě dostupný</button>
     
     <p>Hodnota tvé dostupnosti v daný den je indikována barvou korespondujícího čísla podle infografiky výše.</p>
@@ -38,8 +38,8 @@
                 <div class="day">
                     <button 
                         x-text="(Number.parseInt(day) + 1) + '.'"
-                        :filled="value > 0"
-                        :secondary="value == 1"
+                        :filled="value == 2"
+                        :tonal="value == 1"
                         @click="month[day] = (value + 1) % 3; $store.save()"
                     ></button>
                 </div>

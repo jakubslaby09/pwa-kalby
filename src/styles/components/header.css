@@ -71,7 +71,6 @@ header, body > header {
         font-size: 1.5rem;
         line-height: 0;
         color: var(--on-surface);
-        overflow: visible;
         z-index: 1;
         opacity: 0.8;
     }

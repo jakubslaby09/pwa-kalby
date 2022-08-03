@@ -2,7 +2,7 @@ import stack from './router'
 import { animations } from './animations'
 
 const modifications = {
-    '[ripple], [page], body > header, button, input[type="submit"], input[type="checkbox"]' (e) {
+    '[ripple], [page], body > header, button, input[type="submit"], input[type="checkbox"] + label' (e) {
         e.addEventListener('pointerdown', () => animations.ripple(e))
         e.addEventListener('keydown', event => {
             if((event as KeyboardEvent).key == 'Enter') animations.ripple(e, 10)

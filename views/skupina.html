@@ -24,10 +24,11 @@
         <card outlined>
             <template x-for="day in penetration.values.length + 2">
                 <button
-                    :secondary="penetration.values[day - 1] == 2"
-                    :filled="day > 1 && day < penetration.values.length + 2"
-                    x-text="day - 1 + penetration.first + '.'"
+                    x-data="{ value: penetration.values[day - 2] }"
+                    x-text="day - 1 + penetration.first"
                     x-show="penetration.first != 0 || day != 1"
+                    :tonal="value >= 1 && value != 2"
+                    :filled="value == 2"
                     style="margin: 0 0.5rem;"
                 ></button>
             </template>
@@ -43,16 +44,21 @@
         include: true,
     },
     {
+        name: 'Karel',
+        include: true,
+    },
+    {
         name: 'Bohouš',
         include: true,
     }
 ]}">
 <template x-for="(person, i) in people">
-    <label ripple class="person" :for="'include' + i + 'checkbox'">
+    <div>
         <input type="checkbox" x-model="person.include" :id="'include' + i + 'checkbox'">
-        <p x-text="person.name"></p>
-        <p class="arrow">chevron_right</p>
-    </label>
+        <label ripple class="person" :for="'include' + i + 'checkbox'">
+            <p x-text="person.name"></p>
+        </label>
+    </div>
 </template>
 
 </section>
@@ -60,16 +66,9 @@
 <style scoped>
     .person {
         display: flex;
-        height: 5rem;
+        padding: 1.7rem 0 !important;
         border: solid currentColor;
         border-width: 1.5px 0 0;
-    }
-    .person:last-of-type {
-        border-width: 1.5px 0;
-    }
-    .person > .arrow {
-        font-family: 'Material Icons';
-        margin-left: auto !important;
     }
     .person > * {
         margin: auto 1rem !important;

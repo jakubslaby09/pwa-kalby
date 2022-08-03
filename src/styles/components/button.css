@@ -18,10 +18,11 @@ button {
         color: var(--on-primary);
         background-color: var(--primary);
         
-        &[secondary] {
-            color: var(--on-primary-container);
-            background-color: var(--primary-container);
-        }
+    }
+    
+    &[tonal] {
+        color: var(--on-primary-container);
+        background-color: var(--primary-container);
     }
 
     &[outlined] {
@@ -98,37 +99,40 @@ button {
 
     &[icon=""] {
         transition: transform 0.5s cubic-bezier(0, 1, 0, 1);
-        text-transform: unset;
+        width: 40px;
+        padding: 0;
+        margin: 4px;
+        flex: 0 0 40px;
+        font-weight: unset;
         font-family: 'Material Icons';
         font-size: 1.5rem;
-        background-color: #0000;
-        color: currentColor;
-        padding: 0.5rem;
-        margin: 0.6rem;
-        font-weight: unset;
         box-shadow: unset;
         letter-spacing: unset;
-        outline: none;
-        overflow: visible;
 
-        &::before {
-            content: '';
-            position: absolute;
-            inset: -1rem;
-            overflow: visible;
-            z-index: -1;
-            pointer-events: none;
+        &:hover {
+            &:not([filled]):not([tonal]) {
+                background-color: #8884;
+            }
         }
         
-        &:hover::before {
-            background: radial-gradient(
-                circle,
-                #8884 49%,
-                #0000 50%
-            );
+        &:not([filled]) {
+            color: currentColor;
+
+            &[toggle][active] {
+                color: var(--primary);
+            }
+        }
+        
+        &[toggle]:not([active]) {
+            font-family: 'Material Icons Outlined';
         }
 
-        &[rotate] {
+        &[filled][toggle]:not([active]) {
+            color: var(--primary);
+            background-color: var(--surface-variant);
+        }
+
+        &[rotate][active] {
             transform: rotate(360deg);
         }
     }
