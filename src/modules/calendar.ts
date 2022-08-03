@@ -9,7 +9,7 @@ declare global {
     }
 }
 
-const advance = 3
+const advance = 2
 let calendar: Calendar | null = null
 window.calendar = calendar
 
