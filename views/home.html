@@ -31,7 +31,7 @@
 </card>
 
 <template x-for="(month, name) in $store.calendar">
-    <section>
+    <section x-init="new Date().getMonth() - new Date(name).getMonth() == -1 ? $el.scrollIntoView() : null">
         <h3 x-text="new Date(name).toLocaleString('cs', { month: 'long' })"></h3>
         <div class="month">
             <template x-for="(value, day) in month">
